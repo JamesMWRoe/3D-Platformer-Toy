@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerBaseState
+public abstract class PlayerBaseState : BaseState
 {
-    public abstract void OnStart();
+    protected PlayerStateMachine stateMachine;
+    protected PlayerStateFactory states;
 
-    public abstract void OnUpdate();
-    
-    public abstract void OnEnd();
+    public PlayerBaseState(string stateName, PlayerStateMachine playerStateMachine, PlayerStateFactory playerStateFactory)
+    {
+        states = playerStateFactory;
+        stateMachine = playerStateMachine;
+        name = stateName;
+    }
+
+
 }
