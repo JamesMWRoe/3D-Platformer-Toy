@@ -19,4 +19,10 @@ public class PlayerStateFactory
 
   public PlayerBaseState Fall()
   {  return new PlayerFallState("fall", stateMachine, this);  }
+
+  public PlayerBaseState HangingIdle()
+  {  return new PlayerHangingIdleState("hangingIdle", stateMachine, this);  }
+
+  public PlayerBaseState HangingMove()
+  {  return new PlayerHangingMoveState("hangingMove", stateMachine, this);  }
 }

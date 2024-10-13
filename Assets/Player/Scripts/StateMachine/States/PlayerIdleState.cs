@@ -6,6 +6,7 @@ public class PlayerIdleState : PlayerGroundedState
   public override void OnStart()
   {
     stateMachine.xyVelocity = Vector2.zero;
+    stateMachine.animator.SetFloat("moveSpeed", 0);
   }
 
   public override void OnEnd()

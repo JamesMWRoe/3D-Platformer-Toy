@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-  BaseState currentState;
+  protected BaseState currentState;
 
   protected void Awake()
   {

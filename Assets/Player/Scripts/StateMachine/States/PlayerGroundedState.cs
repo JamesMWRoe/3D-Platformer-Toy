@@ -3,6 +3,8 @@ public class PlayerGroundedState : PlayerBaseState
 {
   public PlayerGroundedState(string name, PlayerStateMachine playerStateMachine, PlayerStateFactory playerStateFactory) : base(name, playerStateMachine, playerStateFactory) { }
 
+  int groundLayerMask = 1 << 6;
+
   public override void OnStart()
   {}
 
@@ -11,6 +13,10 @@ public class PlayerGroundedState : PlayerBaseState
 
   public override void OnUpdate()
   {
+    stateMachine.Move();
+
+    stateMachine.UpdateRotation();
+
     CheckForStateTransition();
   }
 
@@ -21,6 +27,19 @@ public class PlayerGroundedState : PlayerBaseState
       stateMachine.TransitionToState(states.Jump());
       return;
     }
+
+    if (!IsGrounded())
+    {
+      stateMachine.TransitionToState(states.Fall());
+      return;
+    }
+  }
+
+  protected bool IsGrounded()
+  {
+    bool groundCheck = Physics.Raycast(stateMachine.transform.position - (0.01f * Vector3.down), Vector3.down, 0.1f, groundLayerMask);
+
+    return groundCheck;
   }
 
 }
