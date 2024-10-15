@@ -7,9 +7,11 @@ public class PlayerStateMachine : StateMachine
   PlayerActions actions;
   PlayerStateFactory states;
 
+  public PlayerAnimationHandler animationEventHandler;
   public CharacterController controller;
   public Transform cameraTransform;
   public Transform ledgeCheckPoint;
+  public Transform climbEndPoint;
   public Animator animator;
 
   float jumpHeight = 3;

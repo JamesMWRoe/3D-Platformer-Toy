@@ -17,6 +17,9 @@ public class PlayerMoveState : PlayerGroundedState
 
     stateMachine.xyVelocity = stateMachine.moveDirection * stateMachine.speed;
 
+    stateMachine.Move();
+    stateMachine.UpdateRotation();
+
     base.OnUpdate();
   }
 

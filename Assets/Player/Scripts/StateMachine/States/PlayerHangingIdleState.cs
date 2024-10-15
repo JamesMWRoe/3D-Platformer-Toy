@@ -5,7 +5,6 @@ public class PlayerHangingIdleState : PlayerHangingState
 
   int groundLayerMask = 1 << 6;
 
-  Vector3 ledgeOffset = new Vector3(0, -1.81f, 0.43f);
   float ledgeYOffset = -1.81f;
   float ledgeXZOffset = 0.43f;
 
@@ -34,13 +33,12 @@ public class PlayerHangingIdleState : PlayerHangingState
 
   public override void OnUpdate()
   {
-    stateMachine.animator.SetFloat("shimmySpeed", stateMachine.moveInput.x);
-    CheckForStateTransition();
+    base.OnUpdate();
   }
 
   protected override void CheckForStateTransition()
   {
-    if (stateMachine.moveInput.x*stateMachine.moveInput.x > 0)
+    if (!IsAtLedgeEdge() && stateMachine.moveInput.x*stateMachine.moveInput.x > 0)
     {
       stateMachine.TransitionToState(states.HangingMove());
       return;

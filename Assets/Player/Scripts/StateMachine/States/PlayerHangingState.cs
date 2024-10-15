@@ -5,12 +5,14 @@ public class PlayerHangingState : PlayerBaseState
 
   int groundLayerMask = 1 << 6;
 
-  Vector3 ledgeOffset = new Vector3(0, -1.81f, 0.43f);
+  protected Vector2 shimmyDirection;
 
   public override void OnStart()
   {
     stateMachine.animator.SetFloat("moveSpeed", 0);
     stateMachine.animator.SetBool("isHanging", true);
+
+    shimmyDirection = new Vector2(stateMachine.transform.right.x, stateMachine.transform.right.z);
 
   }
 
@@ -21,13 +23,29 @@ public class PlayerHangingState : PlayerBaseState
 
   public override void OnUpdate()
   {
-    stateMachine.animator.SetFloat("shimmySpeed", stateMachine.moveInput.x);
     CheckForStateTransition();
   }
 
   protected override void CheckForStateTransition()
   {
+    if(stateMachine.moveInput.y < 0)
+    {
+      stateMachine.TransitionToState(states.HangingFall());
+      return;
+    }
 
+    if(stateMachine.jumpAction.WasPressedThisFrame())
+    {
+      stateMachine.TransitionToState(states.HangingClimb());
+      return;
+    }
   }
 
+  protected bool IsAtLedgeEdge()
+  {
+    Vector3 pointToCheck = stateMachine.ledgeCheckPoint.position + 0.5f*stateMachine.moveInput.x*new Vector3(shimmyDirection.x, 0, shimmyDirection.y);
+    bool isOnLedge = Physics.Raycast(pointToCheck, Vector3.down, 0.5f, 1 << 6);
+
+    return !isOnLedge;
+  }
 }

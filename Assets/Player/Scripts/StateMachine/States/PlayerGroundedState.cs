@@ -13,9 +13,7 @@ public class PlayerGroundedState : PlayerBaseState
 
   public override void OnUpdate()
   {
-    stateMachine.Move();
-
-    stateMachine.UpdateRotation();
+    
 
     CheckForStateTransition();
   }
