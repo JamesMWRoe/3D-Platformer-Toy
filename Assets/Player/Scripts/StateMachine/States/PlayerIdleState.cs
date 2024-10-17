@@ -26,7 +26,27 @@ public class PlayerIdleState : PlayerGroundedState
       return;
     }
 
+    if(stateMachine.crouchAction.WasPerformedThisFrame() && OnSlope())
+    {
+      stateMachine.TransitionToState(states.Slide());
+      return;
+    }
+
     base.CheckForStateTransition();
+  }
+
+
+  bool OnSlope()
+  {
+    RaycastHit groundInfo;
+    Physics.Raycast(stateMachine.transform.position, Vector3.down, out groundInfo, 0.2f, groundLayerMask);
+
+    Vector3 comparisonVector = Vector3.ProjectOnPlane(Vector3.down, groundInfo.normal);
+
+    if (comparisonVector.magnitude < Mathf.Epsilon)
+    {  return false;  }
+
+    return true;
   }
 
 }

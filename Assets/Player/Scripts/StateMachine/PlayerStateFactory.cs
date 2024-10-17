@@ -27,8 +27,11 @@ public class PlayerStateFactory
   {  return new PlayerHangingMoveState("hangingMove", stateMachine, this);  }
 
   public PlayerBaseState HangingFall()
-  {  return new PlayerHangingFallState("hangingFall",stateMachine, this);  }
+  {  return new PlayerHangingFallState("hangingFall", stateMachine, this);  }
 
   public PlayerBaseState HangingClimb()
   {  return new PlayerHangingClimbState("hangingClimb", stateMachine, this);  }
+
+  public PlayerBaseState Slide()
+  {  return new PlayerSlideState("slide", stateMachine, this);  }
 }

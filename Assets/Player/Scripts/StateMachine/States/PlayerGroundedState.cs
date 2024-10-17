@@ -3,7 +3,7 @@ public class PlayerGroundedState : PlayerBaseState
 {
   public PlayerGroundedState(string name, PlayerStateMachine playerStateMachine, PlayerStateFactory playerStateFactory) : base(name, playerStateMachine, playerStateFactory) { }
 
-  int groundLayerMask = 1 << 6;
+  protected int groundLayerMask = 1 << 6;
 
   public override void OnStart()
   {}

@@ -29,6 +29,7 @@ public class PlayerStateMachine : StateMachine
 
   public InputAction moveAction;
   public InputAction jumpAction;
+  public InputAction crouchAction;
 
   protected override BaseState GetInitialState()
   {  return states.Idle(); }
@@ -44,6 +45,7 @@ public class PlayerStateMachine : StateMachine
     {   actions = new PlayerActions();   }
     moveAction = actions.Movement.Move;
     jumpAction = actions.Movement.Jump;
+    crouchAction = actions.Movement.Crouch;
     actions.Enable();
 
     states = new PlayerStateFactory(this);

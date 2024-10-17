@@ -30,6 +30,11 @@ public class PlayerMoveState : PlayerGroundedState
       stateMachine.TransitionToState(states.Idle());
       return;
     }
+
+    if (stateMachine.crouchAction.WasPressedThisFrame())
+    {
+      stateMachine.TransitionToState(states.Slide());
+    }
     
     base.CheckForStateTransition();
   }
