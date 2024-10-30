@@ -24,7 +24,7 @@ public class PlayerHangingMoveState : PlayerHangingState
     Debug.Log("right direction: "+ stateMachine.transform.right);
 
 
-    stateMachine.xyVelocity = -stateMachine.moveInput.x * shimmyDirection * shimmySpeed;
+    stateMachine.velocity = -stateMachine.moveInput.x * shimmyDirection * shimmySpeed;
     stateMachine.Move();
     
     base.OnUpdate();

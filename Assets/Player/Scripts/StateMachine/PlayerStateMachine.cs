@@ -22,8 +22,7 @@ public class PlayerStateMachine : StateMachine
   public float jumpVelocity;
 
   public Vector2 moveInput;
-  public Vector2 xyVelocity;
-  public float zVelocity;
+  public Vector3 velocity;
 
   public Vector2 moveDirection;
 
@@ -85,7 +84,6 @@ public class PlayerStateMachine : StateMachine
 
   public void Move()
   {
-    Vector3 velocity = new Vector3(xyVelocity.x, zVelocity, xyVelocity.y);
     controller.Move(Time.deltaTime * velocity);
   }
 }

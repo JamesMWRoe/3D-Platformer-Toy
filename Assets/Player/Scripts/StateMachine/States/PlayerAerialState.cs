@@ -13,7 +13,7 @@ public class PlayerAerialState : PlayerBaseState
 
   public override void OnUpdate()
   {
-    stateMachine.zVelocity += stateMachine.gravity * Time.deltaTime;
+    stateMachine.velocity.y += stateMachine.gravity * Time.deltaTime;
 
     stateMachine.Move();
 

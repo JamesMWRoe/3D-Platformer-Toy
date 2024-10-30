@@ -5,14 +5,14 @@ public class PlayerHangingState : PlayerBaseState
 
   int groundLayerMask = 1 << 6;
 
-  protected Vector2 shimmyDirection;
+  protected Vector3 shimmyDirection;
 
   public override void OnStart()
   {
     stateMachine.animator.SetFloat("moveSpeed", 0);
     stateMachine.animator.SetBool("isHanging", true);
 
-    shimmyDirection = new Vector2(stateMachine.transform.right.x, stateMachine.transform.right.z);
+    shimmyDirection = new Vector3(stateMachine.transform.right.x, 0, stateMachine.transform.right.z);
 
   }
 

@@ -12,7 +12,7 @@ public class PlayerSlideState : PlayerBaseState
   public override void OnStart()
   {
     maxSpeedFactor = 10*stateMachine.speed;
-    currentMaxSpeed = stateMachine.xyVelocity.magnitude;
+    currentMaxSpeed = stateMachine.velocity.magnitude;
 
     Debug.Log("initial max speed: " + currentMaxSpeed);
   }
@@ -30,8 +30,7 @@ public class PlayerSlideState : PlayerBaseState
 
     Vector3 slideDirection = (slopeDirection + 0.5f*inputDirectionAlongSurface).normalized;
 
-    Vector3 currentVelocity = new Vector3(stateMachine.xyVelocity.x, stateMachine.zVelocity, stateMachine.xyVelocity.y);
-    Vector3 newVelocity = currentVelocity + slideDirection*slideSpeed;
+    Vector3 newVelocity = stateMachine.velocity + slideDirection*slideSpeed;
 
     Debug.Log("slope direction: " + slopeDirection);
     Debug.Log("slide direction: " + slideDirection);
@@ -55,8 +54,7 @@ public class PlayerSlideState : PlayerBaseState
     Debug.Log("max velocity after clamping: " + newVelocity);
     Debug.Log("\n");
 
-    stateMachine.xyVelocity = new Vector2(newVelocity.x, newVelocity.z);
-    stateMachine.zVelocity = newVelocity.y;
+    stateMachine.velocity = newVelocity;
 
     stateMachine.Move();
 

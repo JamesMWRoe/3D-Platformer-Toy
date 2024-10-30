@@ -13,8 +13,7 @@ public class PlayerHangingClimbState : PlayerHangingState
     stateMachine.animator.SetBool("isHanging", false);
     
 
-    stateMachine.xyVelocity = Vector2.zero;
-    stateMachine.zVelocity = 0;
+    stateMachine.velocity = Vector3.zero;
 
   }
 

@@ -10,12 +10,12 @@ public class PlayerHangingFallState : PlayerBaseState
 
   public override void OnEnd()
   {
-    stateMachine.zVelocity = 0;
+    stateMachine.velocity.z = 0;
   }
 
   public override void OnUpdate()
   {
-    stateMachine.zVelocity += stateMachine.gravity * Time.deltaTime;
+    stateMachine.velocity.z += stateMachine.gravity * Time.deltaTime;
 
     stateMachine.Move();
 

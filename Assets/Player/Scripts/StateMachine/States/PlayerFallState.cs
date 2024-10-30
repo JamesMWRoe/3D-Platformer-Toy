@@ -9,7 +9,7 @@ public class PlayerFallState : PlayerAerialState
 
   public override void OnEnd()
   {
-    stateMachine.zVelocity = 0;
+    stateMachine.velocity.y = 0;
   }
 
   public override void OnUpdate()

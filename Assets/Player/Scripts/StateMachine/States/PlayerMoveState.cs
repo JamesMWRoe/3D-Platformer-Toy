@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 public class PlayerMoveState : PlayerGroundedState
 {
-
-
   public PlayerMoveState(string name, PlayerStateMachine playerStateMachine, PlayerStateFactory playerStateFactory) : base(name, playerStateMachine, playerStateFactory) { }
+
+  Vector3 groundNormal;
 
   public override void OnStart()
   {}
@@ -13,9 +14,13 @@ public class PlayerMoveState : PlayerGroundedState
 
   public override void OnUpdate()
   {
+    UpdateGroundNormal();
+    Vector3 moveDirection3D = new Vector3 (stateMachine.moveDirection.x, 0, stateMachine.moveDirection.y);
+    Vector3 moveDirection = Vector3.ProjectOnPlane(moveDirection3D, groundNormal).normalized;
+
     stateMachine.animator.SetFloat("moveSpeed", stateMachine.moveInput.magnitude);
 
-    stateMachine.xyVelocity = stateMachine.moveDirection * stateMachine.speed;
+    stateMachine.velocity = moveDirection * stateMachine.speed;
 
     stateMachine.Move();
     stateMachine.UpdateRotation();
@@ -37,5 +42,13 @@ public class PlayerMoveState : PlayerGroundedState
     }
     
     base.CheckForStateTransition();
+  }
+
+  protected void UpdateGroundNormal()
+  {
+    RaycastHit hitInfo;
+    Physics.Raycast(stateMachine.transform.position, Vector3.down, out hitInfo, 0.51f, groundLayerMask);
+
+    groundNormal = hitInfo.normal;
   }
 }

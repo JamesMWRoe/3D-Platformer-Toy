@@ -14,8 +14,7 @@ public class PlayerHangingIdleState : PlayerHangingState
 
     stateMachine.animator.SetFloat("shimmySpeed", 0);
 
-    stateMachine.xyVelocity = Vector2.zero;
-    stateMachine.zVelocity = 0;
+    stateMachine.velocity = Vector3.zero;
 
     HangSetupInfo setupInfo = GetHangSetupInfo();
     

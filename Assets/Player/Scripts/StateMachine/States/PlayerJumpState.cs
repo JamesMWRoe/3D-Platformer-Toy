@@ -6,7 +6,7 @@ public class PlayerJumpState : PlayerAerialState
 
   public override void OnStart()
   {
-    stateMachine.zVelocity += stateMachine.jumpVelocity;
+    stateMachine.velocity.y += stateMachine.jumpVelocity;
   }
 
   public override void OnEnd()
@@ -15,14 +15,14 @@ public class PlayerJumpState : PlayerAerialState
   public override void OnUpdate()
   {
     if (stateMachine.jumpAction.WasReleasedThisFrame())
-    {  stateMachine.zVelocity /= 3;  }
+    {  stateMachine.velocity.y /= 3;  }
 
     base.OnUpdate();
   }
 
   protected override void CheckForStateTransition()
   {
-    if (stateMachine.zVelocity <= 0)
+    if (stateMachine.velocity.y <= 0)
     {  stateMachine.TransitionToState(states.Fall());  }
     base.CheckForStateTransition();
   }
